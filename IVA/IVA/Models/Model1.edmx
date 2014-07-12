@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IVADBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="IVADBModelStoreContainer">
+          <EntitySet Name="tbl_Control_Types" EntityType="IVADBModel.Store.tbl_Control_Types" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Product_Images" EntityType="IVADBModel.Store.tbl_Product_Images" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Product_Reviews" EntityType="IVADBModel.Store.tbl_Product_Reviews" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Product_Specs" EntityType="IVADBModel.Store.tbl_Product_Specs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Products" EntityType="IVADBModel.Store.tbl_Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Spec_items" EntityType="IVADBModel.Store.tbl_Spec_items" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Specs" EntityType="IVADBModel.Store.tbl_Specs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Users" EntityType="IVADBModel.Store.tbl_Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_tbl_Product_Image_tbl_Product" Association="IVADBModel.Store.FK_tbl_Product_Image_tbl_Product">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Product_Images" EntitySet="tbl_Product_Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Review_tbl_Product" Association="IVADBModel.Store.FK_tbl_Product_Review_tbl_Product">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Product_Reviews" EntitySet="tbl_Product_Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Review_tbl_User" Association="IVADBModel.Store.FK_tbl_Product_Review_tbl_User">
+            <End Role="tbl_Users" EntitySet="tbl_Users" />
+            <End Role="tbl_Product_Reviews" EntitySet="tbl_Product_Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Spec_tbl_Product" Association="IVADBModel.Store.FK_tbl_Product_Spec_tbl_Product">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Product_Specs" EntitySet="tbl_Product_Specs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Spec_tbl_Spec" Association="IVADBModel.Store.FK_tbl_Product_Spec_tbl_Spec">
+            <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+            <End Role="tbl_Product_Specs" EntitySet="tbl_Product_Specs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Spec_items_tbl_Specs" Association="IVADBModel.Store.FK_tbl_Spec_items_tbl_Specs">
+            <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+            <End Role="tbl_Spec_items" EntitySet="tbl_Spec_items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Spec_tbl_Spec" Association="IVADBModel.Store.FK_tbl_Spec_tbl_Spec">
+            <End Role="tbl_Control_Types" EntitySet="tbl_Control_Types" />
+            <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_Control_Types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Product_Images">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="ImagePath" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Product_Reviews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="Point" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Product_Specs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="ProductID" Type="bigint" />
+          <Property Name="SpecID" Type="bigint" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="Rate" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="OurRate" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Stock" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Spec_items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="SpecID" Type="bigint" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Specs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ControlType" Type="bigint" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProfilePicPath" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_Product_Image_tbl_Product">
+          <End Role="tbl_Products" Type="IVADBModel.Store.tbl_Products" Multiplicity="1" />
+          <End Role="tbl_Product_Images" Type="IVADBModel.Store.tbl_Product_Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Images">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Review_tbl_Product">
+          <End Role="tbl_Products" Type="IVADBModel.Store.tbl_Products" Multiplicity="1" />
+          <End Role="tbl_Product_Reviews" Type="IVADBModel.Store.tbl_Product_Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Reviews">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Review_tbl_User">
+          <End Role="tbl_Users" Type="IVADBModel.Store.tbl_Users" Multiplicity="1" />
+          <End Role="tbl_Product_Reviews" Type="IVADBModel.Store.tbl_Product_Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Reviews">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Spec_tbl_Product">
+          <End Role="tbl_Products" Type="IVADBModel.Store.tbl_Products" Multiplicity="0..1" />
+          <End Role="tbl_Product_Specs" Type="IVADBModel.Store.tbl_Product_Specs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Specs">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Spec_tbl_Spec">
+          <End Role="tbl_Specs" Type="IVADBModel.Store.tbl_Specs" Multiplicity="0..1" />
+          <End Role="tbl_Product_Specs" Type="IVADBModel.Store.tbl_Product_Specs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Specs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Specs">
+              <PropertyRef Name="SpecID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Spec_items_tbl_Specs">
+          <End Role="tbl_Specs" Type="IVADBModel.Store.tbl_Specs" Multiplicity="1" />
+          <End Role="tbl_Spec_items" Type="IVADBModel.Store.tbl_Spec_items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Specs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Spec_items">
+              <PropertyRef Name="SpecID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Spec_tbl_Spec">
+          <End Role="tbl_Control_Types" Type="IVADBModel.Store.tbl_Control_Types" Multiplicity="1" />
+          <End Role="tbl_Specs" Type="IVADBModel.Store.tbl_Specs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Control_Types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Specs">
+              <PropertyRef Name="ControlType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IVADBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="IVADBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Control_Types" EntityType="IVADBModel.tbl_Control_Types" />
+          <EntitySet Name="tbl_Product_Images" EntityType="IVADBModel.tbl_Product_Images" />
+          <EntitySet Name="tbl_Product_Reviews" EntityType="IVADBModel.tbl_Product_Reviews" />
+          <EntitySet Name="tbl_Product_Specs" EntityType="IVADBModel.tbl_Product_Specs" />
+          <EntitySet Name="tbl_Products" EntityType="IVADBModel.tbl_Products" />
+          <EntitySet Name="tbl_Spec_items" EntityType="IVADBModel.tbl_Spec_items" />
+          <EntitySet Name="tbl_Specs" EntityType="IVADBModel.tbl_Specs" />
+          <EntitySet Name="tbl_Users" EntityType="IVADBModel.tbl_Users" />
+          <AssociationSet Name="FK_tbl_Spec_tbl_Spec" Association="IVADBModel.FK_tbl_Spec_tbl_Spec">
+            <End Role="tbl_Control_Types" EntitySet="tbl_Control_Types" />
+            <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Image_tbl_Product" Association="IVADBModel.FK_tbl_Product_Image_tbl_Product">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Product_Images" EntitySet="tbl_Product_Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Review_tbl_Product" Association="IVADBModel.FK_tbl_Product_Review_tbl_Product">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Product_Reviews" EntitySet="tbl_Product_Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Review_tbl_User" Association="IVADBModel.FK_tbl_Product_Review_tbl_User">
+            <End Role="tbl_Users" EntitySet="tbl_Users" />
+            <End Role="tbl_Product_Reviews" EntitySet="tbl_Product_Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Spec_tbl_Product" Association="IVADBModel.FK_tbl_Product_Spec_tbl_Product">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Product_Specs" EntitySet="tbl_Product_Specs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Product_Spec_tbl_Spec" Association="IVADBModel.FK_tbl_Product_Spec_tbl_Spec">
+            <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+            <End Role="tbl_Product_Specs" EntitySet="tbl_Product_Specs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Spec_items_tbl_Specs" Association="IVADBModel.FK_tbl_Spec_items_tbl_Specs">
+            <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+            <End Role="tbl_Spec_items" EntitySet="tbl_Spec_items" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_Control_Types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbl_Specs" Relationship="IVADBModel.FK_tbl_Spec_tbl_Spec" FromRole="tbl_Control_Types" ToRole="tbl_Specs" />
+        </EntityType>
+        <EntityType Name="tbl_Product_Images">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Caption" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_Products" Relationship="IVADBModel.FK_tbl_Product_Image_tbl_Product" FromRole="tbl_Product_Images" ToRole="tbl_Products" />
+        </EntityType>
+        <EntityType Name="tbl_Product_Reviews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="Point" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Products" Relationship="IVADBModel.FK_tbl_Product_Review_tbl_Product" FromRole="tbl_Product_Reviews" ToRole="tbl_Products" />
+          <NavigationProperty Name="tbl_Users" Relationship="IVADBModel.FK_tbl_Product_Review_tbl_User" FromRole="tbl_Product_Reviews" ToRole="tbl_Users" />
+        </EntityType>
+        <EntityType Name="tbl_Product_Specs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ProductID" Type="Int64" />
+          <Property Name="SpecID" Type="Int64" />
+          <Property Name="Value" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbl_Products" Relationship="IVADBModel.FK_tbl_Product_Spec_tbl_Product" FromRole="tbl_Product_Specs" ToRole="tbl_Products" />
+          <NavigationProperty Name="tbl_Specs" Relationship="IVADBModel.FK_tbl_Product_Spec_tbl_Spec" FromRole="tbl_Product_Specs" ToRole="tbl_Specs" />
+        </EntityType>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="OurRate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Stock" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="tbl_Product_Images" Relationship="IVADBModel.FK_tbl_Product_Image_tbl_Product" FromRole="tbl_Products" ToRole="tbl_Product_Images" />
+          <NavigationProperty Name="tbl_Product_Reviews" Relationship="IVADBModel.FK_tbl_Product_Review_tbl_Product" FromRole="tbl_Products" ToRole="tbl_Product_Reviews" />
+          <NavigationProperty Name="tbl_Product_Specs" Relationship="IVADBModel.FK_tbl_Product_Spec_tbl_Product" FromRole="tbl_Products" ToRole="tbl_Product_Specs" />
+        </EntityType>
+        <EntityType Name="tbl_Spec_items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="SpecID" Type="Int64" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbl_Specs" Relationship="IVADBModel.FK_tbl_Spec_items_tbl_Specs" FromRole="tbl_Spec_items" ToRole="tbl_Specs" />
+        </EntityType>
+        <EntityType Name="tbl_Specs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ControlType" Type="Int64" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbl_Control_Types" Relationship="IVADBModel.FK_tbl_Spec_tbl_Spec" FromRole="tbl_Specs" ToRole="tbl_Control_Types" />
+          <NavigationProperty Name="tbl_Product_Specs" Relationship="IVADBModel.FK_tbl_Product_Spec_tbl_Spec" FromRole="tbl_Specs" ToRole="tbl_Product_Specs" />
+          <NavigationProperty Name="tbl_Spec_items" Relationship="IVADBModel.FK_tbl_Spec_items_tbl_Specs" FromRole="tbl_Specs" ToRole="tbl_Spec_items" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ProfilePicPath" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbl_Product_Reviews" Relationship="IVADBModel.FK_tbl_Product_Review_tbl_User" FromRole="tbl_Users" ToRole="tbl_Product_Reviews" />
+        </EntityType>
+        <Association Name="FK_tbl_Spec_tbl_Spec">
+          <End Role="tbl_Control_Types" Type="IVADBModel.tbl_Control_Types" Multiplicity="1" />
+          <End Role="tbl_Specs" Type="IVADBModel.tbl_Specs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Control_Types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Specs">
+              <PropertyRef Name="ControlType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Image_tbl_Product">
+          <End Role="tbl_Products" Type="IVADBModel.tbl_Products" Multiplicity="1" />
+          <End Role="tbl_Product_Images" Type="IVADBModel.tbl_Product_Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Images">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Review_tbl_Product">
+          <End Role="tbl_Products" Type="IVADBModel.tbl_Products" Multiplicity="1" />
+          <End Role="tbl_Product_Reviews" Type="IVADBModel.tbl_Product_Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Reviews">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Review_tbl_User">
+          <End Role="tbl_Users" Type="IVADBModel.tbl_Users" Multiplicity="1" />
+          <End Role="tbl_Product_Reviews" Type="IVADBModel.tbl_Product_Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Reviews">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Spec_tbl_Product">
+          <End Role="tbl_Products" Type="IVADBModel.tbl_Products" Multiplicity="0..1" />
+          <End Role="tbl_Product_Specs" Type="IVADBModel.tbl_Product_Specs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Specs">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Product_Spec_tbl_Spec">
+          <End Role="tbl_Specs" Type="IVADBModel.tbl_Specs" Multiplicity="0..1" />
+          <End Role="tbl_Product_Specs" Type="IVADBModel.tbl_Product_Specs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Specs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Product_Specs">
+              <PropertyRef Name="SpecID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Spec_items_tbl_Specs">
+          <End Role="tbl_Specs" Type="IVADBModel.tbl_Specs" Multiplicity="1" />
+          <End Role="tbl_Spec_items" Type="IVADBModel.tbl_Spec_items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Specs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Spec_items">
+              <PropertyRef Name="SpecID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IVADBModelStoreContainer" CdmEntityContainer="IVADBEntities">
+          <EntitySetMapping Name="tbl_Control_Types">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Control_Types">
+              <MappingFragment StoreEntitySet="tbl_Control_Types">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Product_Images">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Product_Images">
+              <MappingFragment StoreEntitySet="tbl_Product_Images">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Product_Reviews">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Product_Reviews">
+              <MappingFragment StoreEntitySet="tbl_Product_Reviews">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Product_Specs">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Product_Specs">
+              <MappingFragment StoreEntitySet="tbl_Product_Specs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SpecID" ColumnName="SpecID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Products">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Products">
+              <MappingFragment StoreEntitySet="tbl_Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="OurRate" ColumnName="OurRate" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Spec_items">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Spec_items">
+              <MappingFragment StoreEntitySet="tbl_Spec_items">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SpecID" ColumnName="SpecID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Specs">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Specs">
+              <MappingFragment StoreEntitySet="tbl_Specs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Users">
+            <EntityTypeMapping TypeName="IVADBModel.tbl_Users">
+              <MappingFragment StoreEntitySet="tbl_Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="ProfilePicPath" ColumnName="ProfilePicPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IVADBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="IVADBModelStoreContainer">
+    <EntitySet Name="tbl_Control_Types" EntityType="IVADBModel.Store.tbl_Control_Types" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_Product_Images" EntityType="IVADBModel.Store.tbl_Product_Images" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_Product_Reviews" EntityType="IVADBModel.Store.tbl_Product_Reviews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_Product_Specs" EntityType="IVADBModel.Store.tbl_Product_Specs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_Products" EntityType="IVADBModel.Store.tbl_Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_Spec_items" EntityType="IVADBModel.Store.tbl_Spec_items" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_Specs" EntityType="IVADBModel.Store.tbl_Specs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_Users" EntityType="IVADBModel.Store.tbl_Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_tbl_Product_Image_tbl_Product" Association="IVADBModel.Store.FK_tbl_Product_Image_tbl_Product">
+      <End Role="tbl_Products" EntitySet="tbl_Products" />
+      <End Role="tbl_Product_Images" EntitySet="tbl_Product_Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Product_Review_tbl_Product" Association="IVADBModel.Store.FK_tbl_Product_Review_tbl_Product">
+      <End Role="tbl_Products" EntitySet="tbl_Products" />
+      <End Role="tbl_Product_Reviews" EntitySet="tbl_Product_Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Product_Review_tbl_User" Association="IVADBModel.Store.FK_tbl_Product_Review_tbl_User">
+      <End Role="tbl_Users" EntitySet="tbl_Users" />
+      <End Role="tbl_Product_Reviews" EntitySet="tbl_Product_Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Product_Spec_tbl_Product" Association="IVADBModel.Store.FK_tbl_Product_Spec_tbl_Product">
+      <End Role="tbl_Products" EntitySet="tbl_Products" />
+      <End Role="tbl_Product_Specs" EntitySet="tbl_Product_Specs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Product_Spec_tbl_Spec" Association="IVADBModel.Store.FK_tbl_Product_Spec_tbl_Spec">
+      <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+      <End Role="tbl_Product_Specs" EntitySet="tbl_Product_Specs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Spec_items_tbl_Specs" Association="IVADBModel.Store.FK_tbl_Spec_items_tbl_Specs">
+      <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+      <End Role="tbl_Spec_items" EntitySet="tbl_Spec_items" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Spec_tbl_Spec" Association="IVADBModel.Store.FK_tbl_Spec_tbl_Spec">
+      <End Role="tbl_Control_Types" EntitySet="tbl_Control_Types" />
+      <End Role="tbl_Specs" EntitySet="tbl_Specs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbl_Control_Types">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Product_Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Caption" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="ImagePath" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="ProductID" Type="bigint" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Product_Reviews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ProductID" Type="bigint" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="Point" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Product_Specs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="ProductID" Type="bigint" />
+    <Property Name="SpecID" Type="bigint" />
+    <Property Name="Value" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Products">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="Rate" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="OurRate" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Stock" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Spec_items">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SpecID" Type="bigint" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Specs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ControlType" Type="bigint" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DisplayName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProfilePicPath" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_Product_Image_tbl_Product">
+    <End Role="tbl_Products" Type="IVADBModel.Store.tbl_Products" Multiplicity="1" />
+    <End Role="tbl_Product_Images" Type="IVADBModel.Store.tbl_Product_Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Products">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Product_Images">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Product_Review_tbl_Product">
+    <End Role="tbl_Products" Type="IVADBModel.Store.tbl_Products" Multiplicity="1" />
+    <End Role="tbl_Product_Reviews" Type="IVADBModel.Store.tbl_Product_Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Products">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Product_Reviews">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Product_Review_tbl_User">
+    <End Role="tbl_Users" Type="IVADBModel.Store.tbl_Users" Multiplicity="1" />
+    <End Role="tbl_Product_Reviews" Type="IVADBModel.Store.tbl_Product_Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Product_Reviews">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Product_Spec_tbl_Product">
+    <End Role="tbl_Products" Type="IVADBModel.Store.tbl_Products" Multiplicity="0..1" />
+    <End Role="tbl_Product_Specs" Type="IVADBModel.Store.tbl_Product_Specs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Products">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Product_Specs">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Product_Spec_tbl_Spec">
+    <End Role="tbl_Specs" Type="IVADBModel.Store.tbl_Specs" Multiplicity="0..1" />
+    <End Role="tbl_Product_Specs" Type="IVADBModel.Store.tbl_Product_Specs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Specs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Product_Specs">
+        <PropertyRef Name="SpecID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Spec_items_tbl_Specs">
+    <End Role="tbl_Specs" Type="IVADBModel.Store.tbl_Specs" Multiplicity="1" />
+    <End Role="tbl_Spec_items" Type="IVADBModel.Store.tbl_Spec_items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Specs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Spec_items">
+        <PropertyRef Name="SpecID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Spec_tbl_Spec">
+    <End Role="tbl_Control_Types" Type="IVADBModel.Store.tbl_Control_Types" Multiplicity="1" />
+    <End Role="tbl_Specs" Type="IVADBModel.Store.tbl_Specs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Control_Types">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Specs">
+        <PropertyRef Name="ControlType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

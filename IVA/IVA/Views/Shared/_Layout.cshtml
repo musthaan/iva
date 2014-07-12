@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            <div class="row">
+                <section class="col-lg-1 col-md-2">
+                    <ul id="side-menu">
+
+                        @foreach (var Spec in (new IVA.Models.IVADBEntities()).tbl_Specs)
+                        {
+                            <li>
+                                @Html.ActionLink(Spec.Name, "List//" + Spec.ID.ToString(), "SpecItems")
+                            </li>
+                        }
+                    </ul>
+                </section>
+                <section class="col-lg-11 col-md-10">
+                    @RenderBody()
+                </section>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>
+                    &copy; @DateTime.Now.Year - My ASP.NET MVC Application
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

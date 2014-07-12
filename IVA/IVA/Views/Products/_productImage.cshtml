@@ -1,0 +1,108 @@
+﻿@model IVA.Models.tbl_Products
+<div class="clear-fix">
+    &nbsp;</div>
+<div class="row-fluid">
+    <div class="col-md-12">
+     <div class="col-md-6">
+            @using (Ajax.BeginForm("ImageInsert", "ProductImages", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId="dvImageList" }, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(mod => Model.ID)
+                <div class="thumbnail">
+                    <img src='@Url.Content(@"~/Images/noimage.png")' id ="imgPic" style="width:100%;" />
+                    <div class="form-group">
+                        <input type="file" class="form-control" id="filePic" name="imageFile" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Caption">
+                        Caption</label>
+                    <input type="text" name="Caption" id="Caption" class="form-control valid" />
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="checkbox" name="IsDefault" id="IsDefault" />
+                        <label for="IsDefault" class="inline">
+                            Default Image</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Remarks">
+                        Remarks</label>
+                    <textarea name="Remarks" id="Remarks" class="form-control"></textarea>
+                </div>
+                <div class="form-group footer">
+                    <button type="submit" class="btn btn-success">
+                        Save</button>
+                </div>
+            }
+        </div>
+        <div class="col-md-6" id ="dvImageList"> 
+        @{Html.RenderPartial("_productImageList", Model.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));}
+              
+        </div>
+        
+    </div>
+</div>
+<div class="clear-fix">
+</div>
+<div class="col-md-12">
+    <div class="progress progress-striped">
+        <div class="progress-bar progress-bar-info">
+            0%</div>
+    </div>
+</div>
+<script src="../../Scripts/jquery.form.js"></script>
+<script type="text/javascript">
+    $("#filePic").change(function (e) {
+        SetImage(this, $("#imgPic"));
+    });
+
+    function SetImage(fileInput, imgCtrl) {
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                imgCtrl.attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+    (function () {
+
+        var bar = $('.progress-bar');
+        var percent = $('.progress-bar');
+        var status = $('#status');
+        $(".progress").hide();
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+                $(".progress").show();
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+                if (percentComplete > 90) {
+                    percent.removeClass("progress-bar-info").addClass("progress-bar-success");
+                }
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                percent.html(xhr.status == 200 ? "Successfully Uploaded" : "Uploading Failed");
+                $(".progress").delay(5000).fadeOut();
+            }
+        });
+
+    })();       
+</script>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<IVA.Models.tbl_Products>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr><th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OurRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class=' @(item.IsActive ? "success" : "danger")'>
+            <td> 
+               <div class="thumbnail">
+                        <img src="http://cf2.souqcdn.com/unit/2014/06/17/45/80/04/6/unit_XL_4580046_5564800490_1707752.jpg" alt="...">
+                   
+                </div>
+             
+            </td>
+            <td>
+                 @Html.ActionLink(item.Name, "Details", new { tid = item.ID })
+                 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OurRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                <div class="btn-group btn-group-xs pull-right">
+                    @Html.ActionLink("Edit", "Edit", new { tid = item.ID }, new { @class = "btn btn-default" })                  
+                    @Html.ActionLink("Delete", "Delete", new { tid = item.ID }, new { @class = "btn btn-danger" })
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+<style>
+.thumbnail > img, .thumbnail a > img
+{
+    max-width:100px;
+}
+</style>
