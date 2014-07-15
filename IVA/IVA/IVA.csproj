@@ -364,7 +364,6 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\_productImage.cshtml" />
-    <Content Include="Views\Products\_productImageList.cshtml" />
     <Content Include="Views\SpecItems\Create.cshtml" />
     <Content Include="Views\SpecItems\Delete.cshtml" />
     <Content Include="Views\SpecItems\Details.cshtml" />
@@ -376,6 +375,7 @@
     <Content Include="Views\Specs\Details.cshtml" />
     <Content Include="Views\Specs\Edit.cshtml" />
     <Content Include="Views\Specs\Index.cshtml" />
+    <Content Include="Views\ProductImages\_productImageList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

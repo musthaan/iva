@@ -61,14 +61,14 @@ namespace HonyeSinga.Controllers
                     }
                     file = null;
                     db.SaveChanges();
-
+                    pro = db.tbl_Products.FirstOrDefault(p => p.ID == id);
                 }
                 files = null;
             }
             catch (Exception ex)
             {
             }
-            return View("~/Views/Products/_productImageList", pro.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));
+            return PartialView("_productImageList", pro.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));
         }
 
         [HttpPost]
