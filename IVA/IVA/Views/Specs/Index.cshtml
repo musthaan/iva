@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -27,26 +27,44 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr style="background-color:  @(item.IsActive ? "green" : "red");" class=' @(item.IsActive ? "green" : "red")'>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbl_Control_Types.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { tid=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { tid=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { tid=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr class=' @(item.IsActive ? "success" : "danger")'>
+            <td>
+               
+                @Html.ActionLink(item.Name, "Details", new { tid = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_Control_Types.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                <div class="btn-group btn-group-xs pull-right">
+                    @Html.ActionLink("Edit", "Edit", new { tid = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete", new { tid = item.ID }, new { @class = "btn btn-danger" })
+                </div>
+            </td>
+        </tr>
+    }
 
 </table>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
+  <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+  <li><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
+  <li><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home">...</div>
+  <div class="tab-pane" id="profile">1...</div>
+  <div class="tab-pane" id="messages">.2..</div>
+  <div class="tab-pane" id="settings">.3..</div>
+</div>
