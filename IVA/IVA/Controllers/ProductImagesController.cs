@@ -8,7 +8,7 @@ using IVA.Models;
 using System.Web.Configuration;
 using System.Net.Http;
 
-namespace HonyeSinga.Controllers
+namespace IVA.Controllers
 {
     public class ProductImagesController : Controller
     {
@@ -25,7 +25,7 @@ namespace HonyeSinga.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ImageInsert(long id, string Caption, string IsDefault, string Remarks)
+        public ActionResult ImageInsert(long id, string Caption, string IsDefault, string Remarks, HttpPostedFileBase imageFile)
         {
             var pro = db.tbl_Products.FirstOrDefault(p => p.ID == id);
             try
@@ -68,13 +68,14 @@ namespace HonyeSinga.Controllers
             catch (Exception ex)
             {
             }
-            return PartialView("_productImageList", pro.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));
+            return (new ProductImagesController().GetProductImageListByProductID(id));
+            //return PartialView("_productImageList", pro.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));
         }
 
         [HttpPost]
-        public ActionResult ImageInsert1(long id, string Caption, string IsDefault, string Remarks)
+        public ActionResult ImageInsert1(long id, string Caption, string IsDefault, string Remarks, HttpPostedFileBase imageFile)
         {
-
+            Console.WriteLine(Request.Files.Count);
             return Json("All files have been successfully stored.");
         }
 
@@ -113,6 +114,13 @@ namespace HonyeSinga.Controllers
 
                 return ms.ToArray();
             }
+        }
+
+
+        [HttpGet]
+        public ActionResult GetProductImageListByProductID(long ProductID)
+        {
+            return PartialView("_productImageList", db.tbl_Product_Images.Where(p => p.ProductID == ProductID));
         }
     }
 }

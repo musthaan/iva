@@ -1,10 +1,12 @@
 ﻿@model IVA.Models.tbl_Products
 <div class="clear-fix">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="row-fluid">
     <div class="col-md-12">
-     <div class="col-md-6">
-            @using (Ajax.BeginForm("ImageInsert", "ProductImages", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId="dvImageList" }, new { enctype = "multipart/form-data" }))
+        <div class="col-md-6">
+
+            @using (Ajax.BeginForm("ImageInsert", "ProductImages", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "dvImageList" }, new { @role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(mod => Model.ID)
@@ -30,18 +32,19 @@
                     <label for="Remarks">
                         Remarks</label>
                     <textarea name="Remarks" id="Remarks" class="form-control"></textarea>
-                </div>
+                </div> 
                 <div class="form-group footer">
                     <button type="submit" class="btn btn-success">
                         Save</button>
                 </div>
             }
         </div>
-        <div class="col-md-6" id ="dvImageList"> 
-        @{Html.RenderPartial("_productImageList", Model.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));}
-              
+        <div class="col-md-6" id="dvImageList">
+            @*@{Html.RenderPartial("/Views/ProductImages/_productImageList", Model.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));}*@
+            @{Html.RenderAction("GetProductImageListByProductID", "ProductImages", new { ProductID =  Model.ID});            }
+
         </div>
-        
+
     </div>
 </div>
 <div class="clear-fix">
@@ -49,10 +52,12 @@
 <div class="col-md-12">
     <div class="progress progress-striped">
         <div class="progress-bar progress-bar-info">
-            0%</div>
+            0%
+        </div>
     </div>
 </div>
- <script src="http://malsup.github.com/jquery.form.js"></script> <script type="text/javascript">
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script type="text/javascript">
     $("#filePic").change(function (e) {
         SetImage(this, $("#imgPic"));
     });
@@ -103,5 +108,5 @@
             }
         });
 
-    })();       
+    })();
 </script>

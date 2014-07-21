@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using IVA.Models;
 
-namespace HonyeSinga.Controllers
+namespace IVA.Controllers
 {
     public class SpecItemsController : Controller
     {

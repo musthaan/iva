@@ -319,6 +319,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\popup\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\tinyeditor\tiny.editor.packed.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

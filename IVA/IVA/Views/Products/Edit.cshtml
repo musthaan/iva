@@ -14,54 +14,56 @@
 </ul>
 <!-- Tab panes -->
 <div class="tab-content">
-    <div class="tab-pane active" id="home"> 
-    <div class="clear-fix">&nbsp;</div>
+    <div class="tab-pane active" id="home">
+        <div class="clear-fix">&nbsp;</div>
         @using (Html.BeginForm("Edit", "Products", null, FormMethod.Post, new { @role = "form" }))
         {
             @Html.HiddenFor(model => model.ID)
-             <div class="row">
-            <div class="col-md-10">
-                <div class="form-group col-md-12">
-                    @Html.LabelFor(model => model.Name)
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Name)
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.Name)
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.IsActive)
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive)
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.Rate)
+                        @Html.TextBoxFor(model => model.Rate, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Rate)
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.OurRate)
+                        @Html.TextBoxFor(model => model.OurRate, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OurRate)
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.Stock)
+                        @Html.TextBoxFor(model => model.Stock, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Stock)
+                    </div>
+                    <div class="form-group col-md-12 footer">
+                        <button type="submit" value="Save" class="btn btn-success">
+                            Save</button>
+                    </div>
                 </div>
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.IsActive)
-                    @Html.EditorFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive)
-                </div>
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.Rate)
-                    @Html.TextBoxFor(model => model.Rate, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Rate)
-                </div>
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.OurRate)
-                    @Html.TextBoxFor(model => model.OurRate, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.OurRate)
-                </div>
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.Stock)
-                    @Html.TextBoxFor(model => model.Stock, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Stock)
-                </div>
-                <div class="form-group col-md-12 footer">
-                    <button type="submit" value="Save" class="btn btn-success">
-                        Save</button>
-                </div>
-            </div>  </div>
+            </div>
         }
     </div>
     <div class="tab-pane  " id="Details">
         @using (Html.BeginForm("UpdateDescription", "Products", null, FormMethod.Post, new { @role = "form" }))
         { @Html.HiddenFor(model => model.ID)
-            @Html.TextAreaFor(model => model.Remarks, new {  @id = "tinyeditor" })
+            @Html.TextAreaFor(model => model.Remarks, new { @id = "tinyeditor" })
             <button type="submit" value="Save" class="btn btn-success">
                 Save</button>
         }
     </div>
     <div class="tab-pane  " id="Specs">
+
         @using (Html.BeginForm("UpdateSpecs", "Products", null, FormMethod.Post, new { @role = "form" }))
         { @Html.HiddenFor(model => model.ID)
             //var db =  new IVA.Models.IVADBEntities();
