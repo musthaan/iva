@@ -27,6 +27,8 @@ namespace IVA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ImageInsert(long id, string Caption, string IsDefault, string Remarks, HttpPostedFileBase imageFile)
         {
+            var fil = Request["imageFile"];
+            var fils = Request["hdfile"];
             var pro = db.tbl_Products.FirstOrDefault(p => p.ID == id);
             try
             {
@@ -73,12 +75,97 @@ namespace IVA.Controllers
         }
 
         [HttpPost]
-        public ActionResult ImageInsert1(long id, string Caption, string IsDefault, string Remarks, HttpPostedFileBase imageFile)
+        public ActionResult ImageInsertx(long id, string Caption, bool IsDefault, string Remarks)
         {
-            Console.WriteLine(Request.Files.Count);
-            return Json("All files have been successfully stored.");
+            var pro = db.tbl_Products.FirstOrDefault(p => p.ID == id);
+            try
+            {
+                HttpFileCollectionBase files = Request.Files;
+                if (files != null && files.Count > 0)
+                {
+
+                    var file = files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+
+                        // extract only the fielname
+                        var fileName = Path.GetFileName(file.FileName);
+                        // TODO: need to define destination
+                        string imageDirectoryPath = WebConfigurationManager.AppSettings.Get("productImageDirectory") + id.ToString() + "//";
+                        (new System.IO.DirectoryInfo(Server.MapPath("~" + imageDirectoryPath))).Create();
+                        var path = Path.Combine(Server.MapPath("~" + imageDirectoryPath), fileName);
+                        file.SaveAs(path);
+
+                        tbl_Product_Images pImg = new tbl_Product_Images();
+                        pImg.Caption = Caption;
+                        pImg.IsDefault = IsDefault;
+                        pImg.Remarks = Remarks;
+                        pImg.ImagePath = imageDirectoryPath + fileName;
+                        pImg.IsActive = true;
+                        pro.tbl_Product_Images.Add(pImg);
+                        fileName = null;
+                        imageDirectoryPath = null;
+                        path = null;
+
+                        pImg = null;
+                    }
+                    file = null;
+                    db.SaveChanges();
+                    pro = db.tbl_Products.FirstOrDefault(p => p.ID == id);
+                }
+                files = null;
+            }
+            catch (Exception ex)
+            {
+            }
+            return (new ProductImagesController().GetProductImageListByProductID(id));
         }
 
+        [HttpDelete]
+        public ActionResult ImageDeletex(long id)
+        {
+            tbl_Product_Images tp = null;
+            try
+            {
+                var productImages = db.tbl_Product_Images.Where(p => p.ID == id);
+                if (productImages != null)
+                {
+
+                    tp = productImages.FirstOrDefault();
+                    db.tbl_Product_Images.Remove(tp);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return (new ProductImagesController().GetProductImageListByProductID(tp.ProductID));
+        }
+        [HttpPut]
+        public ActionResult SetDefaultImage(long id)
+        {
+            tbl_Product_Images tp = null;
+            try
+            {
+                var productImages = db.tbl_Product_Images.Where(p => p.ID == id);
+                if (productImages != null)
+                {
+                    tp = productImages.FirstOrDefault();
+                    foreach (var item in db.tbl_Product_Images.Where(pi => pi.ProductID == tp.ProductID))
+                    {
+                        item.IsDefault = false;
+                    }
+                    tp.IsDefault = true;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return (new ProductImagesController().GetProductImageListByProductID(tp.ProductID));
+        }
         //[HttpPost]
         //public ActionResult UploadFiles(long tid, IEnumerable<HttpPostedFileBase> files)
         //{

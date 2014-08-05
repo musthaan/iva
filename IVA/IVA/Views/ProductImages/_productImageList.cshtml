@@ -11,7 +11,7 @@
     </div>
     <div class="group-body">
         <div id="inner-content-div">
-            <ul style="list-style: none; padding:5px;">
+            <ul style="list-style: none; padding:5px;" class ="zoom-gallery">
                 @foreach (var item in Model)
                 {
                 
@@ -30,10 +30,10 @@
                             <div class="row">
                                 @if (!item.IsDefault)
                                 {
-                                    <button type="button" class="btn btn-success col-md-4" rel='tooltip' title="Make it default image">
+                                    <button type="button" class="btn btn-success col-md-4 defaultImage" rel='tooltip' title="Make it default image" data-imageID="@item.ID">
                                         <i class="glyphicon glyphicon-heart"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger col-md-4" rel='tooltip' title="Delete Image">
+                                    <button type="button" class="btn btn-danger col-md-4 deleteImage" rel='tooltip' title="Delete Image" data-imageID="@item.ID">
                                         <i class="glyphicon glyphicon-trash"></i>
                                     </button>
                                 }
@@ -133,7 +133,7 @@
                         $(this).tooltip('destroy');
                     }
                 );
-
+        
         $('.zoom-gallery').magnificPopup({
             delegate: 'a.image-popup',
             type: 'image',
@@ -160,6 +160,41 @@
         });
         $('#inner-content-div').slimScroll({
             height: '750px'
+        });
+
+        $(".deleteImage").on("click", function (e) {
+            console.log(e);
+            debugger;
+            var data = new FormData();
+            data.append('id', $(this).data("imageid"));
+            $.ajax({
+                url: '/ProductImages/ImageDeletex',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'DELETE',
+                success: function (data) {
+                    $("#dvImageList").html(data);
+                }
+            });
+        });
+        $(".defaultImage").on("click", function (e) {
+            console.log(e);
+            debugger;
+            var data = new FormData();
+            data.append('id', $(this).data("imageid"));
+            $.ajax({
+                url: '/ProductImages/SetDefaultImage',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'PUT',
+                success: function (data) {
+                    $("#dvImageList").html(data);
+                }
+            });
         });
     });
 

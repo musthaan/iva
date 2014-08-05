@@ -1,52 +1,3 @@
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\IVA.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\IVA.pdb
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\Antlr3.Runtime.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.Core.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\EntityFramework.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\Microsoft.Web.WebPages.OAuth.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\Newtonsoft.Json.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Net.Http.Formatting.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Helpers.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Http.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Http.WebHost.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Mvc.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Optimization.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Razor.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.WebPages.Deployment.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.WebPages.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.WebPages.Razor.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\WebGrease.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\WebMatrix.Data.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\WebMatrix.WebData.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\EntityFramework.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\Newtonsoft.Json.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Net.Http.Formatting.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Helpers.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Http.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Http.WebHost.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Mvc.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.Razor.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.WebPages.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.WebPages.Deployment.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\System.Web.WebPages.Razor.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\WebMatrix.Data.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\Microsoft.Web.WebPages.OAuth.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\WebMatrix.WebData.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.Core.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\obj\Debug\IVA.csprojResolveAssemblyReference.cache
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\obj\Debug\IVA.dll
-C:\Users\Arun\Documents\Visual Studio 2012\Projects\IVA\IVA\obj\Debug\IVA.pdb
 I:\git\iva\IVA\IVA\bin\IVA.dll
 I:\git\iva\IVA\IVA\bin\IVA.pdb
 I:\git\iva\IVA\IVA\bin\Antlr3.Runtime.dll
@@ -93,6 +44,6 @@ I:\git\iva\IVA\IVA\bin\DotNetOpenAuth.OAuth.Consumer.xml
 I:\git\iva\IVA\IVA\bin\DotNetOpenAuth.OAuth.xml
 I:\git\iva\IVA\IVA\bin\DotNetOpenAuth.OpenId.xml
 I:\git\iva\IVA\IVA\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-I:\git\iva\IVA\IVA\obj\Debug\IVA.csprojResolveAssemblyReference.cache
 I:\git\iva\IVA\IVA\obj\Debug\IVA.dll
 I:\git\iva\IVA\IVA\obj\Debug\IVA.pdb
+I:\git\iva\IVA\IVA\obj\Debug\IVA.csprojResolveAssemblyReference.cache

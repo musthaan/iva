@@ -10,6 +10,7 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(mod => Model.ID)
+                <input type="hidden" id="hdfile" name="hdfile" />
                 <div class="thumbnail">
                     <img src='@Url.Content(@"~/Images/noimage.png")' id ="imgPic" style="width:100%;" />
                     <div class="form-group">
@@ -34,14 +35,14 @@
                     <textarea name="Remarks" id="Remarks" class="form-control"></textarea>
                 </div> 
                 <div class="form-group footer">
-                    <button type="submit" class="btn btn-success">
+                    <button type="button" class="btn btn-success" id="btnimgupload">
                         Save</button>
                 </div>
             }
         </div>
         <div class="col-md-6" id="dvImageList">
             @*@{Html.RenderPartial("/Views/ProductImages/_productImageList", Model.tbl_Product_Images.Where(pi => pi.IsActive).OrderBy(pi => pi.IsDefault));}*@
-            @{Html.RenderAction("GetProductImageListByProductID", "ProductImages", new { ProductID =  Model.ID});            }
+            @{Html.RenderAction("GetProductImageListByProductID", "ProductImages", new { ProductID = Model.ID });            }
 
         </div>
 
@@ -56,7 +57,7 @@
         </div>
     </div>
 </div>
-<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="/Scripts/jquery.form.js"></script>
 <script type="text/javascript">
     $("#filePic").change(function (e) {
         SetImage(this, $("#imgPic"));
@@ -69,19 +70,21 @@
 
             reader.onload = function (e) {
                 imgCtrl.attr('src', e.target.result);
+                //$("#hdfile").val(e.target.result);
             }
-
+            $("#hdfile").val(fileInput.files[0]);
             reader.readAsDataURL(fileInput.files[0]);
         }
     }
 
-    (function () {
+    /*(function () {
 
         var bar = $('.progress-bar');
         var percent = $('.progress-bar');
         var status = $('#status');
         $(".progress").hide();
-        $('form').ajaxForm({
+
+        $('#form0').ajaxForm({
             beforeSend: function () {
                 status.empty();
                 var percentVal = '0%';
@@ -108,5 +111,37 @@
             }
         });
 
-    })();
+
+
+    });*/
+
+    $(document).ready(function () {
+        $("#btnimgupload").click(function (e) {
+            var data = new FormData();
+            jQuery.each($('#filePic')[0].files, function (i, file) {
+                data.append('file-' + i, file);
+            });
+            var _caption = $("#Caption").val();
+            var _IsDefault = $("#IsDefault").is(":checked");
+            var _Remarks = $("#Remarks").val();
+            var _id = $("#ID").val();
+            data.append('Caption', _caption);
+            data.append('IsDefault', _IsDefault);
+            data.append('Remarks', _Remarks);
+            data.append('id', _id);
+            $.ajax({
+                url: '/ProductImages/ImageInsertx',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    $("#dvImageList").html(data);
+                    $("#btnimgupload").parents('form').trigger('reset');
+                }
+            });
+
+        });
+    });
 </script>
